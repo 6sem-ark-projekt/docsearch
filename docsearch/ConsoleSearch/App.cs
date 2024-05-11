@@ -16,36 +16,13 @@ namespace ConsoleSearch
 
             Console.WriteLine("Console Search");
 
-            Console.WriteLine("you must login first!");
-
-            bool user_login_bool = false;
-
-            while (user_login_bool == false)
-            {
-                System.Console.WriteLine("user_name:");
-                string user_name = Console.ReadLine();
-
-                System.Console.WriteLine("password:");
-                string password = Console.ReadLine();
-
-                System.Console.WriteLine($"you entered, user_name: {user_name}, password: {password}");
-
-                user_login_bool = mSearchLogic.LogIn(user_name, password);
-
-                if (!user_login_bool)
-                {
-                    Console.WriteLine("login failed, either user_name or password was incorrect!");
-                    Console.WriteLine("please try again");
-                }
-            }
-
-            Console.WriteLine("Login successful, you may proceed with the search.");
+            mSearchLogic.LogIn();
 
             while (true)
             {
-
                 Console.WriteLine("enter search terms - q for quit");
                 string input = Console.ReadLine();
+
                 if (input.Equals("q")) break;
 
                 var query = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);

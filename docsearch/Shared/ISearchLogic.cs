@@ -4,6 +4,6 @@
     {
         SearchResult Search(string[] query, int maxAmount);
 
-        public bool LogIn(string user_name, string password);
+        public bool LogIn();
     }
 }

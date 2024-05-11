@@ -35,35 +35,61 @@ namespace Core
             return res;
         }
 
-        public bool LogIn(string userName, string password)
+        public bool LogIn()
         {
+            Console.WriteLine("you must login first!");
+
             string connectionString = "Data Source=/Users/daddel/documents/skole/6sem/ark_principper/eksamensprojekt/users.db;";
 
-            using (var conn = new SqliteConnection(connectionString))
+            bool user_login_bool = false;
+
+            while (user_login_bool == false)
             {
-                conn.Open();
+                System.Console.WriteLine("user_name:");
+                string typedUserName = Console.ReadLine();
 
-                string sql = "SELECT COUNT(*) FROM users WHERE user_name = @UserName AND password = @Password";
+                System.Console.WriteLine("password:");
+                string typedPassword = Console.ReadLine();
 
-                using (var cmd = new SqliteCommand(sql, conn))
+                System.Console.WriteLine($"user_name: {typedUserName}, password: {typedPassword}");
+
+                using (var conn = new SqliteConnection(connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@UserName", userName);
-                    cmd.Parameters.AddWithValue("@Password", password);
+                    conn.Open();
 
-                    int result = Convert.ToInt32(cmd.ExecuteScalar());
+                    string sql = "SELECT COUNT(*) FROM users WHERE user_name = @UserName AND password = @Password";
 
-                    if (result > 0)
+                    using (var cmd = new SqliteCommand(sql, conn))
                     {
-                        return true;
-                    }
+                        cmd.Parameters.AddWithValue("@UserName", typedUserName);
+                        cmd.Parameters.AddWithValue("@Password", typedPassword);
 
-                    else
-                    {
-                        return false;
-                    }
+                        int result = Convert.ToInt32(cmd.ExecuteScalar());
 
+                        if (result > 0)
+                        {
+                            Console.WriteLine("Login successful, you may proceed with the search.");
+
+                            user_login_bool = true;
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("login failed, either user_name or password was incorrect!");
+                            Console.WriteLine("please try again");
+
+                            user_login_bool = false;
+                        }
+                    }
                 }
             }
+
+            if (user_login_bool == true)
+            {
+                return true;
+            }
+
+            else return false;
         }
 
     }

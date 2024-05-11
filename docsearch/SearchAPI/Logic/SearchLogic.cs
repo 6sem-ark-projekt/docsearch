@@ -7,6 +7,11 @@ namespace SearchAPI.Logic
 {
     public class SearchLogic : ISearchLogic
     {
+        public bool LogIn(){
+
+            return true;
+        }
+
         IDatabase mDatabase;
 
         Dictionary<string, int> mWords;
@@ -22,7 +27,7 @@ namespace SearchAPI.Logic
         public SearchResult Search(String[] query, int maxAmount)
         {
             System.Console.WriteLine("inside Search function in SearchLogic.cs");
-            
+
             List<string> ignored;
 
             DateTime start = DateTime.Now;
