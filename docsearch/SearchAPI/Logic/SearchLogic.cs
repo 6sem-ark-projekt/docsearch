@@ -36,8 +36,6 @@ namespace SearchAPI.Logic
          */
         public SearchResult Search(String[] query, int maxAmount)
         {
-            System.Console.WriteLine("inside Search function in SearchLogic.cs");
-
             List<string> ignored;
 
             DateTime start = DateTime.Now;
