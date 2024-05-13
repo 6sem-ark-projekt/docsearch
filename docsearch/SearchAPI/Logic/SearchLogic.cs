@@ -7,8 +7,13 @@ namespace SearchAPI.Logic
 {
     public class SearchLogic : ISearchLogic
     {
-        public bool LogIn(){
+        public bool LogIn()
+        {
+            return true;
+        }
 
+        public bool WebPageLogIn(string username, string password)
+        {
             return true;
         }
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using WebAppServer.Data;
+using Core;  // Ensure your namespace for ISearchLogic and SearchLogic is correctly referenced
 
 namespace WebAppServer;
 
@@ -15,20 +16,20 @@ public class Program
         builder.Services.AddServerSideBlazor();
         builder.Services.AddSingleton<WeatherForecastService>();
 
+        // Add SearchLogic as a scoped service
+        builder.Services.AddScoped<ISearchLogic, SearchProxy>(); // Registering SearchLogic as the implementation of ISearchLogic
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
         app.UseHttpsRedirection();
-
         app.UseStaticFiles();
-
         app.UseRouting();
 
         app.MapBlazorHub();
@@ -37,4 +38,3 @@ public class Program
         app.Run();
     }
 }
-
