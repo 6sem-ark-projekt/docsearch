@@ -16,7 +16,8 @@ namespace ConsoleSearch
 
             Console.WriteLine("Console Search");
 
-            mSearchLogic.LogIn();
+            int userId = mSearchLogic.LogIn();
+            System.Console.WriteLine(userId);
 
             while (true)
             {
@@ -43,6 +44,15 @@ namespace ConsoleSearch
                     idx++;
                 }
                 Console.WriteLine("Documents: " + result.Hits + ". Time: " + result.TimeUsed.TotalMilliseconds);
+
+                var searchWord = input;
+                var searchHits = result.Hits;
+
+                System.Console.WriteLine("attempting to insert user search ...");
+
+                mSearchLogic.InsertUserSearch(userId, searchWord, searchHits);
+
+                System.Console.WriteLine("print after user search");
             }
         }
 

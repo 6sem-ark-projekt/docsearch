@@ -7,9 +7,14 @@ namespace SearchAPI.Logic
 {
     public class SearchLogic : ISearchLogic
     {
-        public bool LogIn()
+        public int LogIn()
         {
-            return true;
+            return 0;
+        }
+
+        public int InsertUserSearch(int userId, string searchWord, int searchHits)
+        {
+            return 0;
         }
 
         public bool WebPageLogIn(string username, string password)
